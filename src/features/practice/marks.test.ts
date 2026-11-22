@@ -47,7 +47,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: 'Can I get an iced latte?',
       changes: [change('a', 'an')],
-    } as never);
+    });
     expect(r.grade).toBe('tri');
     expect(marked(r.answer, 'removed')).toEqual(['a']);
     expect(marked(r.suggestion, 'added')).toEqual(['an']);
@@ -59,7 +59,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: "I'm planning to stay for six months.",
       changes: [change('I will', "I'm planning to"), change('during', 'for')],
-    } as never);
+    });
     expect(r.grade).toBe('tri');
     expect(r.fixCount).toBe(2);
     expect(marked(r.answer, 'removed')).toEqual(['I will', 'during']);
@@ -70,7 +70,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: 'Can I get an iced latte?',
       changes: [change('can', 'Can')],
-    } as never);
+    });
     expect(r.grade).toBe('o');
     expect(r.changes).toEqual([]);
     expect(unmarked(r.answer)).toBe(true);
@@ -82,7 +82,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: "I'm staying at a hotel near the station.",
       changes: [change('stay', "'m staying"), change('hotel', 'a hotel'), change('station', 'the station')],
-    } as never);
+    });
     expect(r.grade).toBe('x');
     expect(unmarked(r.answer)).toBe(true);
     expect(unmarked(r.suggestion)).toBe(true);
@@ -94,7 +94,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: "I'm going to the hotel.",
       changes: [change('Me go', "I'm going to")],
-    } as never);
+    });
     expect(r.grade).toBe('x');
     expect(unmarked(r.answer)).toBe(true);
     expect(unmarked(r.suggestion)).toBe(true);
@@ -105,7 +105,7 @@ describe('buildResult', () => {
       grade: 'tri',
       suggestion: "I'm staying at a hotel near the station.",
       changes: [change('Hotel.', "I'm staying at a hotel")],
-    } as never);
+    });
     expect(r.grade).toBe('tri');
     expect(r.fixCount).toBe(1);
     expect(marked(r.answer, 'removed')).toEqual(['hotel.']);
@@ -116,7 +116,7 @@ describe('buildResult', () => {
       grade: 'o',
       suggestion: 'May I have an iced latte?',
       changes: [change('Can I get', 'May I have')],
-    } as never);
+    });
     expect(r.grade).toBe('o');
     expect(r.changes).toEqual([]);
     expect(unmarked(r.answer)).toBe(true);

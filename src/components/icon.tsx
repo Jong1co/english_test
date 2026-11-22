@@ -26,7 +26,7 @@ export function Icon({ name, size = 24, color }: IconProps) {
       color={color}
       strokeWidth={2}
       aria-hidden
-      fill={name === 'play' ? 'currentColor' : 'none'}
+      fill={name === 'play' ? color : 'none'}
     />
   );
 }

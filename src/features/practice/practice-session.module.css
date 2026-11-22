@@ -1,0 +1,110 @@
+/* Positioned, so the offsets the layout measures and the docked sheet are both relative to the screen. */
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bgPage);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+  min-height: 44px;
+  padding: env(safe-area-inset-top) var(--spacing-400) 0 var(--spacing-150);
+}
+
+.counter {
+  margin-left: var(--spacing-100);
+  font-variant-numeric: tabular-nums;
+}
+
+.middle {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--spacing-600);
+}
+
+/* The screen sets the transform when the sheet opens; the question slides to it. */
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 300ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .question {
+    transition: none;
+  }
+}
+
+.speakerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-50);
+}
+
+.prompt {
+  margin-top: var(--spacing-100);
+  text-align: center;
+}
+
+.recordPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--spacing-600) max(env(safe-area-inset-bottom), var(--spacing-400));
+}
+
+/* Room for two lines of transcript (en-subbody-2 is 24 tall), so nothing moves when the transcript appears. */
+.transcript {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 48px;
+}
+
+/* The 72px record button plus its 8px ring. The canvas puts 20 between transcript and button and 16 below it;
+   the ring takes 8 of each. */
+.micRing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  margin-top: var(--spacing-300);
+  border-radius: var(--radius-full);
+}
+
+.micRingActive {
+  background: var(--bgSurface);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--textOnAccent);
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.caption {
+  margin-top: var(--spacing-200);
+}
+
+.centred {
+  text-align: center;
+}

@@ -105,8 +105,8 @@ export function ResultSheet({ result, isLast, height, open, onTryAgain, onNext, 
 
       {verdict.showChanges && result.changes.length > 0 && (
         <div className={styles.changes} role="group" aria-label="What changed">
-          {result.changes.map((change) => (
-            <div key={`${change.from}→${change.to}`} className={styles.change}>
+          {result.changes.map((change, index) => (
+            <div key={`${index}-${change.from}→${change.to}`} className={styles.change}>
               <Text en variant="body-2">{`${change.from} → ${change.to}`}</Text>
               <Text variant="body-2" tone="textSecondary">
                 {change.reason}

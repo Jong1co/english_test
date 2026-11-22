@@ -47,4 +47,15 @@ describe('joinResults', () => {
     expect(joinResults(list([]))).toBe('');
     expect(joinResults(list([['  ', false]]))).toBe('');
   });
+
+  it('keeps an earlier word that is only a prefix of the next result', () => {
+    expect(
+      joinResults(
+        list([
+          ['yes', true],
+          ['yesterday I arrived', false],
+        ]),
+      ),
+    ).toBe('yes yesterday I arrived');
+  });
 });

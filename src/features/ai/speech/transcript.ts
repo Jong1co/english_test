@@ -4,7 +4,7 @@ export type ResultListLike = { readonly length: number; readonly [index: number]
 /**
  * Joins what the recognizer heard into one answer. Safari sends each stretch of speech as its own result;
  * Chrome on Android repeats the earlier text in every new result, so a result that starts with the one
- * before it replaces that one instead of being appended.
+ * before it (as whole words) replaces that one instead of being appended.
  */
 export function joinResults(results: ResultListLike): string {
   const parts: string[] = [];
@@ -12,7 +12,9 @@ export function joinResults(results: ResultListLike): string {
     const text = results[i][0]?.transcript.trim() ?? '';
     if (!text) continue;
     const previous = parts[parts.length - 1];
-    if (previous !== undefined && text.toLowerCase().startsWith(previous.toLowerCase())) {
+    const next = text.toLowerCase();
+    const prev = previous?.toLowerCase();
+    if (previous !== undefined && prev !== undefined && (next === prev || next.startsWith(`${prev} `))) {
       parts[parts.length - 1] = text;
     } else {
       parts.push(text);

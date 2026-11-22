@@ -129,6 +129,9 @@ function Session({ situation }: { situation: Situation }) {
   // Behind the result sheet, the panel keeps its recording look.
   const panelPhase = flow.phase === 'result' ? 'recording' : flow.phase;
   const micBlocked = blocked !== null && blocked !== 'mic-denied';
+  // While recording the tap always stops, even if a status re-check sets a block meanwhile.
+  const micLocked = micBlocked && flow.phase !== 'recording';
+  const micDisabled = micLocked || reviewing;
   const caption = blocked ? blockedCaption(blocked) : captionFor(panelPhase, flow.notice);
   const onNext = () => {
     if (!resultOpen) return;
@@ -192,11 +195,11 @@ function Session({ situation }: { situation: Situation }) {
           <IconButton
             icon="mic"
             size="record"
-            tone={micBlocked ? 'outlined' : 'filled'}
+            tone={micLocked ? 'outlined' : 'filled'}
             iconSize={30}
             iconColor="textDisabled"
             label={micLabel(panelPhase)}
-            disabled={micBlocked || reviewing}
+            disabled={micDisabled}
             busy={reviewing}
             onClick={practice.onMic}
             buttonRef={micRef}>

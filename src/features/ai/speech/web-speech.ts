@@ -40,7 +40,7 @@ export type BrowserLike = {
 };
 
 /** If the recognizer never reports that it is listening, give up. */
-export const START_TIMEOUT_MS = 5000;
+export const START_TIMEOUT_MS = 15000;
 /** If the recognizer never reports its end after stop(), keep what was heard. */
 export const END_TIMEOUT_MS = 3000;
 

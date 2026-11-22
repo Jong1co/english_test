@@ -1,0 +1,50 @@
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: inherit;
+}
+
+.medium {
+  width: 44px;
+  height: 44px;
+}
+
+.record {
+  width: 72px;
+  height: 72px;
+}
+
+.ghost {
+  background: transparent;
+}
+
+.ghost:active {
+  background: var(--bgSurface);
+}
+
+.filled {
+  background: var(--accentSolid);
+}
+
+.filled:active {
+  background: var(--accentSolidPressed);
+}
+
+.outlined {
+  background: var(--bgRaised);
+  border: 1px solid var(--borderDefault);
+}
+
+.outlined:active {
+  background: var(--bgSurface);
+}
+
+.base.disabled {
+  cursor: default;
+}

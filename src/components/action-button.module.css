@@ -1,0 +1,40 @@
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-350);
+  padding: var(--spacing-400) var(--spacing-550);
+  cursor: pointer;
+}
+
+.fillPrimary {
+  background: var(--accentSolid);
+}
+
+.fillPrimary:active {
+  background: var(--accentSolidPressed);
+}
+
+/* The border takes 1px each side, so both variants stay the same height. */
+.outlinedSecondary {
+  background: var(--bgPage);
+  border: 1px solid var(--borderDefault);
+  padding: calc(var(--spacing-400) - 1px) calc(var(--spacing-550) - 1px);
+}
+
+.outlinedSecondary:active {
+  background: var(--bgSurface);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.disabled {
+  cursor: default;
+}
+
+.label {
+  text-align: center;
+}

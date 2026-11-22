@@ -1,0 +1,61 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bgPage);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-300);
+  padding: calc(env(safe-area-inset-top) + var(--spacing-100)) var(--spacing-150) 0 var(--spacing-400);
+}
+
+.greeting {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-50);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+}
+
+/* Beats the ghost button's own background, in both states. */
+.header .avatar,
+.header .avatar:active {
+  background: var(--bgSurface);
+}
+
+.carouselArea {
+  flex: 1;
+  min-height: 0;
+  margin-top: var(--spacing-800);
+}
+
+.track {
+  display: flex;
+  gap: var(--spacing-300);
+  padding: 0 var(--spacing-400);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--spacing-400);
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.dots {
+  margin-top: var(--spacing-300);
+}
+
+.footer {
+  padding: 0 var(--spacing-400) max(env(safe-area-inset-bottom), var(--spacing-400));
+}

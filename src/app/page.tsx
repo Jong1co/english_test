@@ -1,3 +1,5 @@
+import { HomeScreen } from '@/features/home/home-screen';
+
 export default function Home() {
-  return <p>English Test</p>;
+  return <HomeScreen />;
 }

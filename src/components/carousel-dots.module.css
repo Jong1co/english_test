@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-150);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--borderDefault);
+  transition:
+    width 200ms,
+    background-color 200ms;
+}
+
+.active {
+  width: 18px;
+  background: var(--accentSolid);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
+  }
+}

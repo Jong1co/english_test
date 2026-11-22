@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# English Test (web)
 
-## Getting Started
+A speaking-practice app: pick a situation, hear the question, answer out loud, get feedback and a next question written by GPT. Speech recognition and read-aloud use the browser; grading and next questions run on the server through OpenAI.
 
-First, run the development server:
+Built with Next.js 16 (App Router, Cache Components), React 19 and CSS Modules. The handover plan is at `/Users/rovigos/Desktop/personal/english_test/docs/superpowers/plans/2026-11-21-nextjs-web-port.md`.
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in the values
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Variable | Required | Meaning |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | yes | OpenAI API key. Read on the server only. |
+| `OPENAI_MODEL` | yes | Model id. No default. |
+| `OPENAI_BASE_URL` | no | Proxy or compatible endpoint. Empty means OpenAI. |
+| `OPENAI_REASONING_EFFORT` | no | For reasoning models: `none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max`. Other values are ignored. Use `low` or `none` for faster answers. |
+| `NEXT_PUBLIC_AI_MODE` | no | `live` (default) or `sample`. Set at build time. |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Without the key and model, `/api/status` returns `not-configured` and the microphone is disabled.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Try it without a microphone or model
 
-## Learn More
+```bash
+NEXT_PUBLIC_AI_MODE=sample npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Sample mode walks every situation with hand-written answers and results.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Check grading with the real model
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+In development, open `/dev/tutor-check`. It sends the ten sample answers to `/api/review` and lists the hand-written grade next to the model's grade, with the suggestion, next question and time per row. The page returns 404 in production builds.
 
-## Deploy on Vercel
+## Tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm test
+npm run lint
+npm run typecheck
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run all four before committing.
+
+## Testing on a phone
+
+Microphone access needs HTTPS. Either deploy, or run `next dev --experimental-https` and trust the generated certificate on the phone.
+
+## Deploying
+
+Add the environment variables above where your host keeps them (for example Vercel project settings).
+
+**Warning:** `/api/review` has no authentication or rate limit. Anyone with the URL can call it and spend your OpenAI credit. Do not share the URL publicly, or turn on deployment protection (for example Vercel Deployment Protection).
+
+## Privacy
+
+Chrome sends speech to Google's servers for recognition.

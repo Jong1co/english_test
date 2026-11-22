@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { createOpenAiProvider } from '@/features/ai/models/openai-provider';
 import { readOpenAiConfig } from '@/features/ai/models/openai-config';
 import { createLlmTutor } from '@/features/ai/tutor/llm-tutor';
